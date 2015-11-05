@@ -142,77 +142,10 @@ function echoRotarySelect($optionName){
 </div>
 <div id="control-algorithm">
 	<div class = "header ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-		<span class='container-title'>PID algorithm for fridge setting</span>
-		<button class="cs update-from-arduino">Update control settings</button>
-		<button class="cv update-from-arduino">Update control variables</button>
-		<button class="cc update-from-arduino">Update control constants</button>
+		<span class='container-title'>Controller state as JSON</span>
+		<button class="cv update-from-arduino">Refresh</button>
 	</div>
-	<div class="algorithm-container ui-widget-content ui-corner-all">
-		<div class="help-panel">
-			<p>
-				The red values are control settings. The beer setting is set by the profile or constant. The fridge setting is set by PID or constant.
-				<br/>
-				The orange values are control variables. These are intermediate results of the fridge setting calculation.
-				<br/>
-				The blue values are constants, they never change automatically.
-			</p>
-		</div>
-		<div class="equation">
-			<div class="cv beerDiff"><span class="name">Beer temp. error</span><span class="val"></span></div>
-			<span class="operator multiply">*</span>
-			<div class="cc Kp"><span class="name">Kp</span><span class="val"></span></div>
-			<span class="operator equals">=</span>
-			<div class="cv p"><span class="name">P</span><span class="val"></span></div>
-		</div>
-		<div class="equation">
-			<div class="cv diffIntegral"><span class="name">Beer temp. error integral</span><span class="val"></span></div>
-			<span class="operator multiply">*</span>
-			<div class="cc Ki"><span class="name">Ki</span><span class="val"></span></div>
-			<span class="operator equals">=</span>
-			<div class="cv i"><span class="name">I</span><span class="val"></span></div>
-		</div>
-		<div class="equation">
-			<div class="cv beerSlope"><span class="name">Beer temp. derivative</span><span class="val"></span></div>
-			<span class="operator multiply">*</span>
-			<div class="cc Kd"><span class="name">Kd</span><span class="val"></span></div>
-			<span class="operator equals">=</span>
-			<div class="cv d"><span class="name">D</span><span class="val"></span></div>
-		</div>
-		<div class="sum-line"><div class="line"></div><span class="operator plus">+</span></div>
-		<div class="equation">
-			<div class="cs beerSet"><span class="name">Beer Setting</span><span class="val"></span></div>
-			<span class="operator plus">+</span>
-			<div class="cv pid-result"><span class="name">P + I + D</span><span class="val"></span></div>
-			<span class="operator equals">=</span>
-			<div class="cs fridgeSet"><span class="name">FridgeSetting</span><span class="val"></span></div>
-		</div>
-	</div>
-	<div class = "header ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-		<span class='container-title'>Predictive ON/OFF and peak detection</span>
-		<button class="cs update-from-arduino">Update control settings</button>
-		<button class="cv update-from-arduino">Update control variables</button>
-		<button class="cc update-from-arduino">Update control constants</button>
-	</div>
-	<div class="algorithm-container ui-widget-content ui-corner-all">
-		<div class="help-panel">
-			<p>
-				The heater and cooler are controlled by a predictive on-off algorithm.
-				BrewPi estimates the overshoot that would happen when it would go to IDLE. When that lands on the target temperature, it goes to IDLE.
-				The overshoot is estimated as time active in hours * estimator.
-				BrewPi detects the actual peaks and compares them to the prediction to automatically adjusts the estimators.
-				You can change them manually in 'advanced settings' when they are far off.
-			</p>
-		</div>
-		<div class="on-off-parameters">
-			<div class="cv estPeak"><span class="name">Estimated peak</span><span class="val"></span></div>
-			<div class="cv negPeak"><span class="name">Last detected negative peak</span><span class="val"></span></div>
-			<div class="cv negPeakEst"><span class="name">Last target for negative peak</span><span class="val"></span></div>
-			<div class="cv posPeak"><span class="name">Last detected positive peak</span><span class="val"></span></div>
-			<div class="cv posPeakEst"><span class="name">Last target for positive peak</span><span class="val"></span></div>
-			<div class="cs coolEst"><span class="name">Cooling overshoot estimator</span><span class="val"></span></div>
-			<div class="cs heatEst"><span class="name">Heating overshoot estimator</span><span class="val"></span></div>
-		</div>
-	</div>
+	<div class="algorithm-container ui-widget-content ui-corner-all"></div>
 </div>
 <div id="advanced-settings">
 	<div class = "header ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
