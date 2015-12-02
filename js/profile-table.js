@@ -38,6 +38,8 @@ BeerProfileTable.prototype = {
         this.newTable = '<table border="0"><thead></thead><tbody></tbody><tfoot></tfoot></table>';
         this.newRow = '<tr></tr>';
         this.newCell = '<td></td>';
+        this.notifyActive = '<button class=""></button>';
+        this.notifyInactive = '<button class=""></button>';
         this.newHeadCell = '<th></th>';
         this.numMilliSecondsPerDay = 24 * 60 * 60 * 1000;
         this.headerTitles = ['Day', 'Temperature', 'Date and Time', 'Notify'];
@@ -140,6 +142,7 @@ BeerProfileTable.prototype = {
     },
     createRow: function(days, temp, theDate, notify) {
         "use strict";
+        notify = typeof notify !== 'undefined' ? notify : '';
         var $newRow = $(this.newRow);
         var cell = $(this.newCell).addClass('profileDays').html( (days || '') );
         this.attachCellHandlers(cell, true); // attach selectAll and blur
@@ -149,7 +152,9 @@ BeerProfileTable.prototype = {
         $newRow.append(cell);
         cell = $(this.newCell).addClass('profileDate').html( (theDate || '') );
         $newRow.append(cell);
-        cell = $(this.newCell).addClass('profileNotify').html( (notify || '') );
+        var $newNotify = notify.length > 0 ? $(this.newNotifyActive) : $(this.newNotifyInactive);
+        cell = $(this.newCell).addClass('profileNotify');
+        cell.append($newNofify);
         $newRow.append(cell);
         this.attachRowHandlers($newRow);
         return $newRow;
