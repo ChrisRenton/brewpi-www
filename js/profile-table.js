@@ -381,7 +381,7 @@ BeerProfileTable.prototype = {
         var points = [];
         var me = this;
         $(this.rowsSelector).each(function() {
-            points[points.length] = { days : $(this).find('td.profileDays').text(), temperature: $(this).find('td.profileTemp').text(), date: $(this).find('td.profileDate').data('profileDate') };
+            points[points.length] = { days : $(this).find('td.profileDays').text(), temperature: $(this).find('td.profileTemp').text(), date: $(this).find('td.profileDate').data('profileDate'), notification: $(this).find('td.profileNotify').data('profileNotify')};
             if ( me.config.editable && points[points.length-1].days === '' ) {
                 points.pop();  // remove last row if its blank and we are editing
             }
