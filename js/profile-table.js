@@ -40,8 +40,8 @@ BeerProfileTable.prototype = {
         this.newCell = '<td></td>';
         this.newHeadCell = '<th></th>';
         this.numMilliSecondsPerDay = 24 * 60 * 60 * 1000;
-        this.headerTitles = ['Day', 'Temperature', 'Date and Time'];
-        this.csvColumns = ['date', 'temperature', 'days'];
+        this.headerTitles = ['Day', 'Temperature', 'Date and Time', 'Notify'];
+        this.csvColumns = ['date', 'temperature', 'days', 'notification'];
         this.prepTable();
     },
     prepTable: function() {
@@ -67,13 +67,10 @@ BeerProfileTable.prototype = {
             return; // header already rendered
         }
         var headerRow = $(this.newRow);
-        $(this.headSelector).append(headerRow);
-        var cell = $(this.newHeadCell).text(this.headerTitles[0]);
-        headerRow.append(cell);
-        cell = $(this.newHeadCell).text(this.headerTitles[1]);
-        headerRow.append(cell);
-        cell = $(this.newHeadCell).text(this.headerTitles[2]);
-        headerRow.append(cell);
+        for( var i=0; i<this.headerTitles.length; i++ ) {
+            var cell = $(this.newHeadCell).text(this.headerTitles[i]);
+            headerRow.append(cell);
+        }
     },
     renderRows: function(rows) {
         "use strict";
@@ -141,7 +138,7 @@ BeerProfileTable.prototype = {
         var me = this;
         this.updateDisplay();
     },
-    createRow: function(days, temp, theDate) {
+    createRow: function(days, temp, theDate, notify) {
         "use strict";
         var $newRow = $(this.newRow);
         var cell = $(this.newCell).addClass('profileDays').html( (days || '') );
@@ -151,6 +148,8 @@ BeerProfileTable.prototype = {
         this.attachCellHandlers(cell, false); // attach just selectAll
         $newRow.append(cell);
         cell = $(this.newCell).addClass('profileDate').html( (theDate || '') );
+        $newRow.append(cell);
+        cell = $(this.newCell).addClass('profileNotify').html( (notify || '') );
         $newRow.append(cell);
         this.attachRowHandlers($newRow);
         return $newRow;
